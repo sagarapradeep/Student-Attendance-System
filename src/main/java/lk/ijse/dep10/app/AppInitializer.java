@@ -1,6 +1,8 @@
 package lk.ijse.dep10.app;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lk.ijse.dep10.app.db.DBConnection;
 
@@ -33,7 +35,21 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         generateSchemaIfNotExist();
+
+        /*load student scene*/
+
+        primaryStage.setTitle("Student Registration");
+        try {
+            primaryStage.setScene
+                    (new Scene(new FXMLLoader(this.getClass().getResource("/view/StudentView.fxml")).load()));
+            primaryStage.show();
+            primaryStage.setMaximized(true);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void generateSchemaIfNotExist() {
